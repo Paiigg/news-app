@@ -1,35 +1,27 @@
+import Navbar from "./Navbar";
+
+import NewsCard from "./NewsCard";
 import React, { useState, useEffect } from "react";
 import { BiSearchAlt } from "react-icons/bi";
-import Navbar from "./Navbar";
+import Home from "./Home";
 import axios from "axios";
-import NewsCard from "./NewsCard";
 
-const Home = () => {
-  const [data, setData] = useState([]);
+const World = ({ search, setSearch, getArticles }) => {
+  const [world, setWorld] = useState([]);
 
-  const [alert, setAlert] = useState(false);
+  const url = `https://newsdata.io/api/1/news?apikey=pub_11867fd20518301c2860a9de0e9e8c4a9f04f&q=world`;
 
-  const [search, setSearch] = useState("");
-
-  const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-
-  const url = `https://newsdata.io/api/1/news?apikey=pub_11867fd20518301c2860a9de0e9e8c4a9f04f&q=${search}`;
-
-  const getArticles = (event) => {
-    if (event.key === "Enter") {
-      axios.get(url).then((response) => {
-        console.log(response);
-        setData(response.data.results);
-        setAlert(true);
-      });
-      setSearch("");
-      console.log(alert);
-    }
-  };
+  useEffect(() => {
+    const getWorld = async () => {
+      const response = await axios.get(url);
+      console.log(response);
+      setWorld(response.data.results);
+    };
+    getWorld();
+  }, []);
 
   return (
     <div>
-      <Navbar search={search} setSearch={setSearch} getArticles={getArticles} />
       <section className=" md:absolute w-full px-4 md:w-9/12 right-14 h-screen overflow-y-scroll no-scrollbar">
         <div className="md:w-9/12">
           <h1 className="text-2xl text-primary font-semibold py-5 text-center md:text-left">
@@ -61,19 +53,19 @@ const Home = () => {
                 />
               </div>
             </div>
-          </div>
-          <div className="grid  md:grid-cols-2 gap-3">
-            {data.map((datas) => {
-              return (
-                <NewsCard
-                  date={datas.pubDate}
-                  url={datas.link}
-                  title={datas.title}
-                  descrption={datas.description}
-                  urlToImage={datas.image_url}
-                />
-              );
-            })}
+            <div className="grid  md:grid-cols-2 gap-3">
+              {world.map((datas) => {
+                return (
+                  <NewsCard
+                    date={datas.pubDate}
+                    url={datas.link}
+                    title={datas.title}
+                    descrption={datas.description}
+                    urlToImage={datas.image_url}
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
@@ -81,4 +73,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default World;

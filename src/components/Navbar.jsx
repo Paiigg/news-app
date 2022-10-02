@@ -35,17 +35,17 @@ const Navbar = ({ search, setSearch, getArticles }) => {
     {
       icon: <BiGlobe size={20} />,
       tittle: "Around The World",
-      path: "/hot",
+      path: "/world",
     },
     {
       icon: <TbBusinessplan size={20} />,
       tittle: "Business",
-      path: "/update",
+      path: "/business",
     },
     {
       icon: <BiCapsule size={20} />,
       tittle: "Health",
-      path: "/more",
+      path: "/health",
     },
   ];
 
@@ -95,7 +95,9 @@ const Navbar = ({ search, setSearch, getArticles }) => {
             >
               <i>{val.icon}</i>
               <li>
-                <Link className="">{val.tittle}</Link>
+                <Link to={val.path} className="">
+                  {val.tittle}
+                </Link>
               </li>
             </div>
           ))}
@@ -115,7 +117,9 @@ const Navbar = ({ search, setSearch, getArticles }) => {
             >
               <i>{val.icon}</i>
               <li>
-                <Link className="">{val.tittle}</Link>
+                <Link to={val.path} className="">
+                  {val.tittle}
+                </Link>
               </li>
             </div>
           ))}
