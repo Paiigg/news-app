@@ -14,7 +14,7 @@ const Home = () => {
 
   const proxyUrl = "https://cors-anywhere.herokuapp.com/";
 
-  const url = `${proxyUrl}/https://newsapi.org/v2/everything?q=${search}&apiKey=165e5fb7d6004aa09a11d3b489525478`;
+  const url = `${proxyUrl}https://newsapi.org/v2/everything?q=${search}&apiKey=165e5fb7d6004aa09a11d3b489525478`;
 
   const getArticles = (event) => {
     if (event.key === "Enter") {
