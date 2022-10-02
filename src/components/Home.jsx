@@ -14,19 +14,21 @@ const Home = () => {
 
   const proxyUrl = "https://cors-anywhere.herokuapp.com/";
 
-  const url = `https://newsapi.org/v2/everything?q=${search}&apiKey=165e5fb7d6004aa09a11d3b489525478`;
+  const url = `${proxyUrl}/https://newsapi.org/v2/everything?q=${search}&apiKey=165e5fb7d6004aa09a11d3b489525478`;
+
+  const url1 = `https://newsdata.io/api/1/news?apikey=pub_11867fd20518301c2860a9de0e9e8c4a9f04f&q=${search}`;
 
   const getArticles = (event) => {
     if (event.key === "Enter") {
       axios
-        .get(url, {
+        .get(url1, {
           headers: {
             Origin: "http://localhost",
           },
         })
         .then((response) => {
           console.log(response);
-          setData(response.data.articles);
+          setData(response.data.results);
           setAlert(true);
         });
       setSearch("");
@@ -73,11 +75,11 @@ const Home = () => {
             {data.map((datas) => {
               return (
                 <NewsCard
-                  date={datas.publishedAt}
-                  url={datas.url}
+                  date={datas.pubDate}
+                  url={datas.link}
                   title={datas.title}
                   descrption={datas.description}
-                  urlToImage={datas.urlToImage}
+                  urlToImage={datas.image_url}
                 />
               );
             })}
