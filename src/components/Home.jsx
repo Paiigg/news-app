@@ -18,11 +18,18 @@ const Home = () => {
 
   const getArticles = (event) => {
     if (event.key === "Enter") {
-      axios.get(url).then((response) => {
-        console.log(response);
-        setData(response.data.articles);
-        setAlert(true);
-      });
+      axios
+        .get(url, {
+          headers: {
+            "X-Requested-With": "XMLHttpRequest",
+            Origin: "http://localhost",
+          },
+        })
+        .then((response) => {
+          console.log(response);
+          setData(response.data.articles);
+          setAlert(true);
+        });
       setSearch("");
       console.log(alert);
     }
