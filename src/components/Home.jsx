@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 import axios from "axios";
 import NewsCard from "./NewsCard";
 
-const Home = () => {
+const Home = ({ tittle }) => {
   const [data, setData] = useState([]);
 
   const [alert, setAlert] = useState(false);
@@ -14,6 +14,7 @@ const Home = () => {
   const proxyUrl = "https://cors-anywhere.herokuapp.com/";
 
   const url = `https://newsdata.io/api/1/news?apikey=pub_11867fd20518301c2860a9de0e9e8c4a9f04f&q=${search}`;
+  const url1 = `https://newsdata.io/api/1/news?apikey=pub_11867fd20518301c2860a9de0e9e8c4a9f04f&q=random`;
 
   const getArticles = (event) => {
     if (event.key === "Enter") {
@@ -27,24 +28,27 @@ const Home = () => {
     }
   };
 
+  useEffect(() => {
+    const getWorld = async () => {
+      const response = await axios.get(url1);
+      console.log(response);
+      setData(response.data.results);
+    };
+    getWorld();
+  }, []);
+
   return (
     <div>
       <Navbar search={search} setSearch={setSearch} getArticles={getArticles} />
       <section className=" md:absolute w-full px-4 md:w-9/12 right-14 h-screen overflow-y-scroll no-scrollbar">
         <div className="md:w-9/12">
-          <h1 className="text-2xl text-primary font-semibold py-5 text-center md:text-left">
-            Articles or News for you
+          <h1
+            tittle={"Around The World"}
+            className="text-2xl text-primary font-semibold py-5 text-center md:text-left"
+          >
+            {tittle}
           </h1>
           <div className="flex justify-center  flex-col items-center gap-5">
-            <p className="text-center  text-primary font-semibold text-md">
-              {alert ? " " : "Go Search News You Want :3"}
-            </p>
-            <img
-              className={alert ? "hidden" : "block rounded-lg px-4"}
-              src={alert ? " " : "https://picsum.photos/500/300"}
-              alt="https://picsum.photos/500/300"
-            />
-
             <div className=" items-center gap-3 flex md:hidden mb-5 w-full px-4">
               <div className="relative w-full ">
                 <input

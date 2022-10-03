@@ -6,7 +6,7 @@ import { BiSearchAlt } from "react-icons/bi";
 const NewsCard = ({ title, descrption, url, urlToImage, date }) => {
   return (
     <div>
-      <div className="bg-white w-[350px] md:w-full h-[190px] mx-auto p-4">
+      <div className="bg-white w-full overflow-x-hidden no-scrollbar h-[190px] mx-auto p-4">
         <div className="flex justify-between">
           <div className="h-[132px] overflow-y-scroll no-scrollbar">
             <a

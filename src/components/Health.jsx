@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import Home from "./Home";
 import axios from "axios";
 
-const Business = ({ tittle }) => {
+const Health = ({ tittle }) => {
   return (
     <div>
-      <Home tittle={"Business News"} />
+      <Home tittle={"Health News"} />
     </div>
   );
 };
 
-export default Business;
+export default Health;

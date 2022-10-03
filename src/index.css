@@ -10,6 +10,7 @@ body {
   font-family: "Roboto", sans-serif;
   background-color: #f4f9f8;
   text-align: left;
+  overflow-x: hidden;
 }
 
 .no-scrollbar::-webkit-scrollbar {
